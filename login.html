@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>登陆界面</title>
+	<link rel="stylesheet" type="text/css" href="login.css" />
+	<style type="text/css">  
+	        .code   
+	        {   
+	            background-image:url(code.jpg);   
+	            font-family:Arial;   
+	            font-style:italic;   
+	            color:Red;   
+	            border:0;   
+	            padding:2px 3px;   
+	            letter-spacing:3px;   
+	            font-weight:bolder;   
+	        }   
+	        .unchanged   
+	        {   
+	            border:0;   
+	        }   
+	</style> 
+	<script type="text/javascript" src="jquery-3.4.1.min.js"></script>
+</head>
+<body onLoad="createCode()">
+	<form action="http://127.0.0.1:8082/login" method="post">
+	 	<div class="text1">
+		<label> 请输入用户名</label>
+		<input type="text" name="username"/>
+		</div>
+		<div>
+		<label> 请输入密码&nbsp;&nbsp;&nbsp;</label>
+		<input type="password" name="password" id="pwd" />
+		<input type="radio" value="0" name="显示密码" id="showPsw" onclick="hideShowPsw()"/>显示密码
+		</div>
+		<div>  
+		<label> 请输入验证码</label>
+    	<input  type="text"  name="validCode1" id="validCode" />  
+    	<input  type="text"  name="validCode2" onClick="createCode()" readonly="readonly" id="checkCode" class="unchanged" style="width: 80px;cursor:pointer"  />  
+        </div>
+		<div>
+		<input type="submit" value="登陆"/>
+		<input type="button" name="register" value ="注册" onclick="window.location.href='http://127.0.0.1:8082/register'"/>
+		</div>
+	<script type="text/javascript">
+        var pwd=document.getElementById("pwd");
+        var showPsw=document.getElementById("showPsw");
+        var code; //在全局 定义验证码 
+		function hideShowPsw(){
+			if(showPsw.value==1){
+				showPsw.value=0;
+				showPsw.checked=0;
+				pwd.type = "password";
+			}
+			else{
+				showPsw.value=1;
+				pwd.type = "text";
+			}
+		}
+		//构造验证码
+        function createCode()   
+        {    
+	        code = "";   
+	        var codeLength = 6;//验证码的长度   
+	        var checkCode = document.getElementById("checkCode");   
+	        var selectChar = new Array(0,1,2,3,4,5,6,7,8,9,'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S',   'T','U','V','W','X','Y','Z');//所有候选组成验证码的字符，当然也可以用中文的      
+	        for(var i=0;i<codeLength;i++)   
+	        {   
+	            var charIndex = Math.floor(Math.random()*36);   
+	            code +=selectChar[charIndex];   
+	        }    
+	        if(checkCode)   
+	        {   
+	            checkCode.className="code";   
+	            checkCode.value = code;
+	            checkCode.blur();   
+	        }        
+	    }    
+	</script>
+</body>
+</html>

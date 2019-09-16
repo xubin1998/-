@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>注册界面</title>
+	<link rel="stylesheet" type="text/css" href="register.css" />
+</head>
+<body>
+	<form action="http://127.0.0.1:8082/register" method="post" onsubmit= "return formCheck()">
+		<div class="text1">
+		<label> 请输入用户名&nbsp;&nbsp;&nbsp;</label>
+		<input type="text" name="username"/>
+		</div>
+		<div>
+		<label> 请输入密码&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+		<input type="password" name="password1" id="password1"/>
+		</div>
+		<div>
+		<label> 请再次输入密码</label>
+		<input type="password" name="password2" id="password2"/>
+		</div>
+		<div>
+		<input type="submit" value="注册"/>
+		<input type="radio" value="1" name="显示密码" id="showPsw" onclick="hideShowPsw()"/>显示密码
+		</div>
+	</form>
+	<script type="text/javascript">
+		var pwd1 = document.getElementById("password1");
+        var pwd2 = document.getElementById("password2");
+        var showPsw=document.getElementById("showPsw");
+    	function formCheck(){
+	       console.log(pwd1.value,pwd2.value);
+	       if(pwd1.value!=pwd2.value){
+	       alert("两次输入的密码不一致！");
+	       return false;
+	       }
+	       return true;
+	    }
+		function hideShowPsw(){
+			if(showPsw.c==1){
+				showPsw.c=0;
+				showPsw.checked=0;
+				pwd1.type = "password";
+				pwd2.type = "password";
+			}
+			else{
+				showPsw.c=1;
+				pwd1.type = "text";
+				pwd2.type = "text";
+			} 
+		}
+	</script>
+</body>
+</html>
